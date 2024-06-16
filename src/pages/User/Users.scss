@@ -2,15 +2,13 @@
 
 .dashboard {
     display: flex;
-    height: 100vh;
+    // height: 100vh;
     background-color: #fbfbfb;
     font-family: "Work Sans", sans-serif;
 
     .sidebar {
-        flex: 0 0 250px;
         background-color: #fff;
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        height: 100vh;
         position: fixed;
         left: 0;
         top: 0;
