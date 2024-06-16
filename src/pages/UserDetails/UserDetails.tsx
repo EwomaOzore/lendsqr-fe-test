@@ -1,33 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
 import './UserDetails.scss';
 
-const UserDetails: React.FC<{ organization: string }> = ({ organization }) => {
+interface User {
+  id: any;
+  full_name: string;
+  serial_number: string;
+  users_tier: number; // Assuming users_tier is a number
+  account_owed: string;
+  account_number: string;
+  bank: string;
+  phone_number: string;
+  email_address: string;
+  bvn: string;
+  gender: string;
+  marital: string;
+  children: number;
+  type_of_residence: string;
+  level_of_education: string;
+  employment_status: string;
+  sector_of_employment: string;
+  duration_of_employment: string;
+  office_email: string;
+  monthly_income: string;
+  loan_repayment: string;
+  social_media: {
+    twitter: string;
+    facebook: string;
+    instagram: string;
+  };
+  guarantor: {
+    full_name: string;
+    phone_number: string;
+    email_address: string;
+    relationship: string;
+  };
+  date_joined: string;
+  time_joined: string;
+  status: string;
+}
+
+const UserDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [user, setUser] = useState<null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`https://run.mocky.io/v3/e23f44a0-ab98-4b96-8ed8-83b88952868c`);
+        const response = await fetch('https://run.mocky.io/v3/1af640a7-f83b-444a-99db-f81b4491e2d7');
         if (!response.ok) {
           throw new Error('Failed to fetch user');
         }
         const userData = await response.json();
-        setUser(userData);
+        const userDetail = userData.users.find((user: User) => user.id.toString() === id);
+        setUser(userDetail);
       } catch (error) {
         console.error('Error fetching user:', error);
       }
     };
-
     fetchUser();
-  }, []);
+  }, [id]);
 
   if (!user) {
-    return <p>Loading user...</p>;
+    return <div>Loading...</div>;
   }
+
+  const goBack = () => {
+    navigate(`/users`);
+  };
+
+  const renderStars = (tier: number) => {
+    const stars = [];
+    const maxStars = 3;
+
+    for (let i = 1; i <= maxStars; i++) {
+      if (i <= tier) {
+        stars.push(<img key={i} src="/svg/star_filled.svg" alt="Filled Star" className="star-icon" />);
+      } else {
+        stars.push(<img key={i} src="/svg/star_empty.svg" alt="Empty Star" className="star-icon" />);
+      }
+    }
+
+    return stars;
+  };
 
   return (
     <div className="dashboard">
@@ -36,7 +95,7 @@ const UserDetails: React.FC<{ organization: string }> = ({ organization }) => {
         <Header className="header" />
         <div className="content">
           <div className="user-details">
-            <div className="back-to-users">
+            <div className="back-to-users" onClick={goBack}>
               <img src='/svg/backarrow.svg' alt='Back Arrow' /> Back to Users
             </div>
             <div className="user-header">
@@ -48,24 +107,24 @@ const UserDetails: React.FC<{ organization: string }> = ({ organization }) => {
             </div>
           </div>
           <div className="user-profile">
-            <div className='profile'>
+            <div className="profile">
               <div className="profile-image">
                 <img src="/avatar.png" alt="User Avatar" style={{ width: 100 }} />
               </div>
               <div className="profile-info">
                 <div>
-                  <h3>Oluwaseun Adeyemi</h3>
-                  <p>LSQFf587g90</p>
+                  <h3>{user.full_name}</h3>
+                  <p>{user.serial_number}</p>
                 </div>
                 <div className="vertical-line"></div>
                 <div className="user-tier">
                   <p>User’s Tier</p>
-                  {/* Placeholder for star ratings */}
+                  <div className="star-icons">{renderStars(user.users_tier)}</div>
                 </div>
                 <div className="vertical-line"></div>
                 <div className="amount-owed">
-                  <h3>₦200,000.00</h3>
-                  <p>9912345678/Providus Bank</p>
+                  <h3>{user.account_owed}</h3>
+                  <p>{user.account_number}/{user.bank}</p>
                 </div>
               </div>
             </div>
@@ -87,35 +146,35 @@ const UserDetails: React.FC<{ organization: string }> = ({ organization }) => {
               <div className="details">
                 <div>
                   FULL NAME
-                  <p>Oluwaseun Adeyemi</p>
+                  <p>{user.full_name}</p>
                 </div>
                 <div>
                   PHONE NUMBER
-                  <p>2348012345678</p>
+                  <p>{user.phone_number}</p>
                 </div>
                 <div>
                   EMAIL ADDRESS
-                  <p>oluwaseun@gmail.com</p>
+                  <p>{user.email_address}</p>
                 </div>
                 <div>
                   BVN
-                  <p>12345678901</p>
+                  <p>{user.bvn}</p>
                 </div>
                 <div>
                   GENDER
-                  <p>Male</p>
+                  <p>{user.gender}</p>
                 </div>
                 <div>
                   MARITAL STATUS
-                  <p>Single</p>
+                  <p>{user.marital}</p>
                 </div>
                 <div>
                   NUMBER OF CHILDREN
-                  <p>2</p>
+                  <p>{user.children}</p>
                 </div>
                 <div>
                   TYPE OF RESIDENCE
-                  <p>Apartment</p>
+                  <p>{user.type_of_residence}</p>
                 </div>
               </div>
             </div>
@@ -125,31 +184,31 @@ const UserDetails: React.FC<{ organization: string }> = ({ organization }) => {
               <div className="details">
                 <div>
                   LEVEL OF EDUCATION
-                  <p>B.Sc</p>
+                  <p>{user.level_of_education}</p>
                 </div>
                 <div>
                   EMPLOYMENT STATUS
-                  <p>Employed</p>
+                  <p>{user.employment_status}</p>
                 </div>
                 <div>
                   SECTOR OF EMPLOYMENT
-                  <p>Banking</p>
+                  <p>{user.sector_of_employment}</p>
                 </div>
                 <div>
                   DURATION OF EMPLOYMENT
-                  <p>5 years</p>
+                  <p>{user.duration_of_employment}</p>
                 </div>
                 <div>
                   OFFICE EMAIL
-                  <p>oluwaseun@lendsqr.com</p>
+                  <p>{user.office_email}</p>
                 </div>
                 <div>
                   MONTHLY INCOME
-                  <p>₦150,000.00 - ₦250,000.00</p>
+                  <p>{user.monthly_income}</p>
                 </div>
                 <div>
                   LOAN REPAYMENT
-                  <p>40,000</p>
+                  <p>{user.loan_repayment}</p>
                 </div>
               </div>
             </div>
@@ -159,15 +218,15 @@ const UserDetails: React.FC<{ organization: string }> = ({ organization }) => {
               <div className="details">
                 <div>
                   TWITTER
-                  <p>@oluwaseun</p>
+                  <p>{user.social_media.twitter}</p>
                 </div>
                 <div>
                   FACEBOOK
-                  <p>oluwaseun.adeyemi</p>
+                  <p>{user.social_media.facebook}</p>
                 </div>
                 <div>
                   INSTAGRAM
-                  <p>@oluwaseun_adeyemi</p>
+                  <p>{user.social_media.instagram}</p>
                 </div>
               </div>
             </div>
@@ -177,19 +236,19 @@ const UserDetails: React.FC<{ organization: string }> = ({ organization }) => {
               <div className="details">
                 <div>
                   FULL NAME
-                  <p>Temitope Adeyemi</p>
+                  <p>{user.guarantor.full_name}</p>
                 </div>
                 <div>
                   PHONE NUMBER
-                  <p>2348098765432</p>
+                  <p>{user.guarantor.phone_number}</p>
                 </div>
                 <div>
                   EMAIL ADDRESS
-                  <p>temitope@gmail.com</p>
+                  <p>{user.guarantor.email_address}</p>
                 </div>
                 <div>
                   RELATIONSHIP
-                  <p>Sibling</p>
+                  <p> {user.guarantor.relationship}</p>
                 </div>
               </div>
             </div>

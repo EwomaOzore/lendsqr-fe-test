@@ -5,7 +5,7 @@ import Pagination from '../Pagination/Pagination';
 import Filters from '../Filters/Filters';
 import './UserTable.scss';
 
-const API_URL = 'https://run.mocky.io/v3/e23f44a0-ab98-4b96-8ed8-83b88952868c';
+const API_URL = 'https://run.mocky.io/v3/1af640a7-f83b-444a-99db-f81b4491e2d7';
 
 interface User {
   organization: string;
@@ -40,7 +40,6 @@ const UserTable: React.FC = () => {
       setUsers(usersData);
       setFilteredUsers(usersData);
     };
-
     getUsers();
   }, []);
 
@@ -53,7 +52,6 @@ const UserTable: React.FC = () => {
         setOpenMoreDropdownId(null);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -71,9 +69,8 @@ const UserTable: React.FC = () => {
   };
 
   const handleViewDetails = (userId: number) => {
-      console.log('Navigating to user details:', userId);
-      navigate(`/user/${userId}`);
-      };
+    navigate(`/users/${userId}`);
+  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -85,7 +82,6 @@ const UserTable: React.FC = () => {
 
   const handleFilterChange = (filters: { [key: string]: string }) => {
     let filtered = users;
-
     if (filters.organization) {
       filtered = filtered.filter(user => user.organization === filters.organization);
     }
@@ -104,7 +100,6 @@ const UserTable: React.FC = () => {
     if (filters.status) {
       filtered = filtered.filter(user => user.status.toLowerCase() === filters.status.toLowerCase());
     }
-
     setFilteredUsers(filtered);
     setCurrentPage(1);
   };
@@ -131,9 +126,7 @@ const UserTable: React.FC = () => {
                     />
                     {openFilterDropdownId === index && (
                       <div ref={filterDropdownRef} className="filter-dropdown">
-                        <Filters
-                          onFilterChange={handleFilterChange}
-                        />
+                        <Filters onFilterChange={handleFilterChange} />
                       </div>
                     )}
                   </span>
@@ -153,14 +146,14 @@ const UserTable: React.FC = () => {
                   <span className={`status ${user.status.toLowerCase()}`}>{user.status}</span>
                 </td>
                 <td className="actions">
-                  <div ref={moreDropdownRef}>
+                  <div>
                     <img
                       src="/svg/more-vert.svg"
                       alt="More"
                       onClick={() => toggleMoreDropdown(user.id)}
                     />
                     {openMoreDropdownId === user.id && (
-                      <div className="dropdown-menu">
+                      <div className="dropdown-menu" ref={moreDropdownRef}>
                         <ul>
                           <li onClick={() => handleViewDetails(user.id)}>
                             <img src="/svg/viewdetails.svg" alt="View Details" />View Details
