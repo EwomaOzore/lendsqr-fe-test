@@ -1,0 +1,27 @@
+.user-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+
+
+    .custom-image {
+        padding: 15px;
+        border-radius: 50%;
+    }
+
+    .users {
+        background-color: #fce8ff;
+    }
+
+    .active {
+        background-color: #eee8ff;
+    }
+
+    .loans {
+        background-color: #feefec;
+    }
+
+    .savings {
+        background-color: #ffebf0;
+    }
+}

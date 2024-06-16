@@ -1,0 +1,77 @@
+.filters {
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            padding: 15px 8px;
+            border: 1px solid #878fa4;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #545F7D;
+
+            &:focus,
+            &:valid {
+                color: #878fa4;
+            }
+        }
+
+        option {
+            width: 50px;
+            color: #878fa4;
+        }
+
+        ::placeholder {
+            color: #878fa4;
+        }
+
+        input[type="date"] {
+            position: relative;
+            background: url('../../../public/svg/calendar.svg') no-repeat right 10px center;
+            background-size: 20px 20px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            color: #545F7D;
+            padding-right: 12px;
+
+            &::-webkit-calendar-picker-indicator {
+                display: contents;
+                color: transparent;
+            }
+        }
+    }
+
+    .filter-buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .reset-button {
+            width: 98px;
+            background-color: #fff;
+            color: #545F7D;
+            border: 1px solid #878fa4;
+        }
+
+        .filter-button {
+            width: 98px;
+            background-color: #39CDCC;
+            color: #fff;
+        }
+    }
+}

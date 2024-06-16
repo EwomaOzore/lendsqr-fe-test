@@ -1,0 +1,53 @@
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+
+    .page-selection {
+        color: #545F7D;
+
+        select {
+            padding: 7px;
+            width: 60px;
+            margin: 0 10px;
+            border: none;
+            background-color: #e5e8ee;
+            color: #213F7D;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    }
+
+    .pages {
+        display: flex;
+        align-items: center;
+
+        .page {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-weight: 400;
+            color: #545F7D;
+
+            &.active {
+                font-weight: 600;
+            }
+        }
+
+        .chevron {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            user-select: none;
+            background-color: #e5e8ee;
+            border-radius: 4px;
+
+            &.disabled {
+                color: #ccc;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
