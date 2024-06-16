@@ -9,7 +9,7 @@ interface User {
   id: any;
   full_name: string;
   serial_number: string;
-  users_tier: number; // Assuming users_tier is a number
+  users_tier: number;
   account_owed: string;
   account_number: string;
   bank: string;

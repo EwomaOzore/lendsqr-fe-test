@@ -58,7 +58,7 @@ const SidebarSection: React.FC<{ title: string; items: { to: string; name: strin
         <React.Fragment>
             <div className="section-title">{title}</div>
             {items.map((item, index) => (
-                <NavLink key={index} to={item.to} className="nav-item" >
+                <NavLink key={index} to={item.to} className="nav-item">
                     <img src={process.env.PUBLIC_URL + item.icon} alt={item.name} className="icon" />
                     {item.name}
                 </NavLink>
