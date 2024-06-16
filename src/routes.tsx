@@ -10,7 +10,7 @@ const RoutesComponent: React.FC = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/users" element={<User />} />
-        <Route path="/users/:id" element={<UserDetails organization='Lendsqr' />} />
+        <Route path="/users/:id" element={<UserDetails />} />
       </Routes>
     </Router>
   );
