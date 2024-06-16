@@ -112,7 +112,7 @@
             p {
                 font-size: 14px;
                 font-weight: 500;
-                margin: 5px 0;
+                margin: 10px 0;
                 color: #545F7D;
             }
         }
@@ -122,6 +122,15 @@
             height: 80px;
             background-color: #e0e0e0;
             margin: 0 30px;
+        }
+
+        .star-icons {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .star-icon {
+            width: 16px;
         }
 
         .amount-owed {
