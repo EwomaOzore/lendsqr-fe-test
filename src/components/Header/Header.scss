@@ -1,18 +1,6 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    position: fixed;
-    min-width: 100vw;
-    height: 100px;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
     .logo {
         width: 150px;
-        padding-left: 30px;
     }
 
     .search-container {
