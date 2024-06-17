@@ -47,7 +47,7 @@
             top: 0;
             left: 0;
             width: 97%;
-            z-index: 1000;
+            z-index: 10;
         }
 
         .content {
@@ -59,23 +59,27 @@
     }
 
     .sidebar-toggle {
-        position: fixed;
-        top: 20px;
-        left: 20px;
+        position: relative;
+        top: 70px;
+        left: 0;
         background-color: #fff;
         border: none;
         padding: 10px 20px;
         cursor: pointer;
-        z-index: 1001;
+        z-index: 100;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        font-size: 1.5rem;
     }
 
     @media (max-width: 769px) {
         .sidebar-toggle {
-            display: flex;
+            display: block;
         }
 
-        .header{
+        .header {
             padding-left: 20px;
         }
 

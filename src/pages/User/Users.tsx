@@ -4,6 +4,8 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
 import UserStats from '../../components/UserStats/UserStats';
 import UserTable from '../../components/UserTable/UserTable';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -18,7 +20,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-    handleResize(); // Call it initially to set the correct state
+    handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -29,12 +31,12 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard">
       <Sidebar className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`} />
+      <div className={`main-content ${isSidebarOpen ? '' : 'shifted'}`}>
       {isMobile && (
         <button className="sidebar-toggle" onClick={toggleSidebar}>
-          {isSidebarOpen ? 'Close' : 'Open'} Menu
+          <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} />
         </button>
       )}
-      <div className={`main-content ${isSidebarOpen ? '' : 'shifted'}`}>
         <Header className="header" />
         <div className="content">
           <UserStats />
