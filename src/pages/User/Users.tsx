@@ -7,7 +7,7 @@ import UserTable from '../../components/UserTable/UserTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const Dashboard: React.FC = () => {
+const Users: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
 
@@ -47,4 +47,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Users;
